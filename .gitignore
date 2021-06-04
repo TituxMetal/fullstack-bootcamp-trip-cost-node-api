@@ -1,0 +1,6 @@
+.docker/data
+dist
+*.env
+!example.env
+node_modules
+yarn-error.log
