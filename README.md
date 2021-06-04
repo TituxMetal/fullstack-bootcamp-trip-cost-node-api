@@ -1,6 +1,6 @@
 # Trip Cost Calculator API
 
-A simple api that calculate the cost of your trip based on expenses you make, eg.gasline, hotels, food, tickets... 
+A simple api that calculate the cost of your trip based on expenses you make, eg.gasoline, hotels, food, tickets... 
 
 This project is made with NodeJs, Express, MongoDb and uses Javascript Esnext syntax.
 
@@ -12,3 +12,78 @@ First install the dependencies with `yarn install` then copy/paste .env.example 
 You can now run the watch command: `yarn watch`
 
 This project is not for running in production, only the local dev/watch mode is working.
+
+# Endpoints
+
+## Create trip (TODO)
+
+    `
+    POST /api/trips
+      Params: { name }
+      Response: {
+        data: { id, name },
+        message: 'Trip created',
+        status: '201 CREATED'
+      }
+    `
+
+## Get all trips (TODO)
+ 
+    `
+    GET /api/trips
+      Response: {
+        data: [{ id, name }],
+        count: 1,
+        message: 'ok',
+        status: '200 OK'
+      }
+    `
+
+## Add an expense (TODO)
+
+    `
+    POST /api/expenses
+      Params: { tripId, date, amount, category, description }
+      Response: {
+        data: { tripId, date, amount, category, description },
+        message: 'Expense created',
+        status: '201 CREATED'
+      }
+    `
+
+## Get expenses for a given trip (TODO)
+
+    `
+    GET /api/expenses/:tripId
+      Arguments: tripId Id of the trip for which we want the costs
+      Response: {
+        data: [{ tripId, date, amount, category, description }],
+        count: 1,
+        message: 'ok',
+        status: '200 OK'
+      }
+    `
+
+# Data Models
+
+- Trips
+
+      `
+      {
+        id: MongoObjectID,
+        name: String, required
+      }
+      `
+
+- Expenses
+
+      `
+      {
+        id: MongoObjectID,
+        tripId: MongoObjectID,
+        date: Date,
+        amount: Number,
+        category: Enum ['travel', 'food', 'accomodation', 'fun'],
+        description: String
+      }
+      `
