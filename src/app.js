@@ -1,16 +1,16 @@
 import express from 'express'
-import path from 'path'
 
 import { port } from '#root/config'
 import { errorHandler } from '#root/middlewares'
-import { mainRoutes } from '#root/routes'
+import { mainRoutes, tripsRoutes } from '#root/routes'
 
 const createApp = () => {
   const app = express()
-  
+
   app.use(express.json())
-  
+
   app.use('/', mainRoutes)
+  app.use('/api/trips', tripsRoutes)
 
   app.all('*', async (req, res, next) => {
     const error = `${req.path} page does not exists`
