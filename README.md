@@ -15,7 +15,8 @@ This project is not for running in production, only the local dev/watch mode is 
 
 # Endpoints
 
-## Create trip (TODO)
+## Create trip (DONE)
+Validation: name => string, minLength: 4
 
     `
     POST /api/trips
@@ -24,6 +25,11 @@ This project is not for running in production, only the local dev/watch mode is 
         data: { id, name },
         message: 'Trip created',
         status: '201 CREATED'
+      }
+      Error: {
+        type: 'Validation Error',
+        reason: 'Name must be a string value' || 'Name must be at least 4 characters long',
+        status: 422
       }
     `
 
