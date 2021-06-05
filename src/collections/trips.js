@@ -3,8 +3,9 @@ import { getCollection } from '#root/database'
 const getAllTrips = async () => {
   const collection = await getCollection('trips')
   const allData = await collection.find().toArray()
+  const data = allData.map(({ _id, name }) => ({ id: _id, name }))
 
-  return allData
+  return data
 }
 
 const createTrip = async (data = {}) => {
