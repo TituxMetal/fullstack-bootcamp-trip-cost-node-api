@@ -33,7 +33,7 @@ Validation: name => string, minLength: 4
       }
     `
 
-## Get all trips (TODO)
+## Get all trips (DONE)
  
     `
     GET /api/trips
