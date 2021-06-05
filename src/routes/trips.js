@@ -1,13 +1,15 @@
 import { Router } from 'express'
 
-import { Trips } from '../collections'
+import { Trips } from '#root/collections'
 
 const router = new Router()
 
 router.get('/', async (_req, res) => {
+  const data = await Trips.getAllTrips()
+  const count = data.length
   const response = {
-    data: [],
-    count: 1,
+    data,
+    count,
     message: 'ok',
     status: '200 OK'
   }
