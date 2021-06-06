@@ -4,7 +4,7 @@ A simple api that calculate the cost of your trip based on expenses you make, eg
 
 This project is made with NodeJs, Express, MongoDb and uses Javascript Esnext syntax.
 
-For Mongo database I've choosed to use an online service: https://railway.app
+For Mongo database I've choosed to use an online service: https://cloud.mongodb.com
 
 # Start the project for dev
 
@@ -16,7 +16,6 @@ This project is not for running in production, only the local dev/watch mode is 
 # Endpoints
 
 ## Create trip (DONE)
-Validation: name => string, minLength: 4
 
     `
     POST /api/trips
@@ -45,7 +44,7 @@ Validation: name => string, minLength: 4
       }
     `
 
-## Add an expense (TODO)
+## Add an expense (DONE)
 
     `
     POST /api/expenses
@@ -57,7 +56,7 @@ Validation: name => string, minLength: 4
       }
     `
 
-## Get expenses for a given trip (TODO)
+## Get expenses for a given trip (DONE)
 
     `
     GET /api/expenses/:tripId
@@ -77,7 +76,7 @@ Validation: name => string, minLength: 4
       `
       {
         id: MongoObjectID,
-        name: String, required
+        name: String, required, minLength: 4
       }
       `
 
@@ -87,9 +86,53 @@ Validation: name => string, minLength: 4
       {
         id: MongoObjectID,
         tripId: MongoObjectID,
-        date: Date,
+        date: String,
         amount: Number,
         category: Enum ['travel', 'food', 'accomodation', 'fun'],
         description: String
       }
       `
+
+# Requests examples
+
+All examples are using Curl
+
+## Create trip
+
+    `
+      curl --request POST \
+        --url http://localhost:3000/api/trips \
+        --header 'Content-Type: application/json' \
+        --data '{
+        "name": "Sweden 2017"
+      }'
+    `
+
+## Get all trips
+
+    `
+      curl --request GET \
+        --url http://localhost:3000/api/trips
+    `
+
+## Add an expense
+
+    `
+      curl --request POST \
+        --url http://localhost:3000/api/expenses \
+        --header 'Content-Type: application/json' \
+        --data '{
+        "tripId": "60bc5436a42734540f34f3a2",
+        "date": "2018-11-04T07:32:22",
+        "amount": 50,
+        "category": "food",
+        "description": "Lunch on the road"
+      }'
+    `
+
+## Get expenses for a given trip
+
+    `
+      curl --request GET \
+        --url http://localhost:3000/api/expenses/60bc5436a42734540f34f3a2
+    `
