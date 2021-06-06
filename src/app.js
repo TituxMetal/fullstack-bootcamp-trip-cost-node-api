@@ -2,7 +2,7 @@ import express from 'express'
 
 import { port } from '#root/config'
 import { errorHandler } from '#root/middlewares'
-import { mainRoutes, tripsRoutes } from '#root/routes'
+import { expensesRoutes, mainRoutes, tripsRoutes } from '#root/routes'
 
 const createApp = () => {
   const app = express()
@@ -10,6 +10,7 @@ const createApp = () => {
   app.use(express.json())
 
   app.use('/', mainRoutes)
+  app.use('/api/expenses', expensesRoutes)
   app.use('/api/trips', tripsRoutes)
 
   app.all('*', async (req, res, next) => {
